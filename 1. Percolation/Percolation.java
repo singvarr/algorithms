@@ -9,8 +9,8 @@ public class Percolation {
 
     public Percolation(int n) {
         if (n <= 0) {
-            throw new java.lang.IllegalArgumentException(
-                    "Should be initialized with positive integer"
+            throw new IllegalArgumentException(
+                "Should be initialized with positive integer"
             );
         }
 
@@ -22,6 +22,7 @@ public class Percolation {
 
     private boolean areCoordsValid(int row, int col) {
         if (row < 0 || col < 0 || grid.length <= row) return false;
+
         return grid[row].length > col;
     }
 
@@ -42,9 +43,7 @@ public class Percolation {
 
     private void checkCoords(int row, int col) {
         if (!areCoordsValid(row, col)) {
-            throw new java.lang.IllegalArgumentException(
-                    "Incorrect coords of grid"
-            );
+            throw new IllegalArgumentException("Incorrect coords of grid");
         }
     }
 
@@ -65,6 +64,7 @@ public class Percolation {
             trackFullWQF.union(i, 0);
             trackPercolatesWQF.union(i, 0);
         }
+
         if (i >= (bottomI - grid.length) && i < bottomI) {
             trackPercolatesWQF.union(i, bottomI);
         }
@@ -73,6 +73,7 @@ public class Percolation {
     public boolean isFull(int row, int col) {
         checkCoords(row - 1, col - 1);
         int index = mapTo1DArray(row - 1, col - 1);
+
         return trackFullWQF.connected(0, index);
     }
 
